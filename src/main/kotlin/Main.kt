@@ -1,12 +1,21 @@
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import software.amazon.awssdk.services.dynamodb.DynamoDbClient
+import software.amazon.awssdk.services.dynamodb.model.AttributeValue
 
 class Main {
     fun runLambda() {
-            val data = getSpecificItem("uuid")
-            val mapper = jacksonObjectMapper()
-            val jsonStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(data)
+        val client = DynamoDbClient.create()
+        val keyToGet = mutableMapOf<String, AttributeValue>()
+        keyToGet["transactionId"] = AttributeValue.builder().s("uuid").build()
 
-            println(jsonStr)
+        val result = client.getItem() {
+            it.tableName("table-name-placeholder")
+            it.key(keyToGet)
         }
+        val numbersMap = result.item()
+        numbersMap?.forEach { key1 ->
+            println(key1.key)
+            println(key1.value)
+        }
+    }
 
 }
