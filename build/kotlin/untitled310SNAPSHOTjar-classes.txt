@@ -1,0 +1,1 @@
+/home/gaba/IdeaProjects/untitled3/build/classes/kotlin/main/Main.class:/home/gaba/IdeaProjects/untitled3/build/classes/kotlin/main/OcrData.class:/home/gaba/IdeaProjects/untitled3/build/classes/kotlin/main/ProjectKt.class
