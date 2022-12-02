@@ -4,7 +4,7 @@ data class TableData(val id: String, val data: String, var expiresAt: String)
 
 const val tableNameVal = "tablename-placeholder"
 
-fun getSpecificItem(transactionId: String): List<TableData> {
+fun getSpecificItem(id: String): TableData {
 
     val client = DynamoDbClient.create()
 
@@ -12,9 +12,11 @@ fun getSpecificItem(transactionId: String): List<TableData> {
         it.tableName(tableNameVal)
     }
 
-    return result.items().map {
+    val list =  result.items().map {
         TableData(it["id"]!!.s(), it["data"]!!.s(), it["expiresAt"]!!.n())
     }
+
+    return list.first { el -> el.id == id };
 
 
 }

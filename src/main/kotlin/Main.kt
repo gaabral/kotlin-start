@@ -1,9 +1,12 @@
-class Main {
-    fun runLambda() = "hello world"
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 
-//    {
-//        val projects = getSpecificItem("df95c62a-8563-468f-90ef-00021f0796ba")
-//
-//    }
+class Main {
+    fun runLambda() {
+            val data = getSpecificItem("uuid")
+            val mapper = jacksonObjectMapper()
+            val jsonStr = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(data)
+
+            println(jsonStr)
+        }
 
 }
